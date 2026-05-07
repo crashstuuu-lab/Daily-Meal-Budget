@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>每日吃饭预算</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow">Daily Food Budget</p>
+            <h1>每日吃饭预算</h1>
+          </div>
+          <button id="indulgenceToggle" class="ghost-button" type="button"></button>
+        </div>
+
+        <div class="date-strip">
+          <span id="todayDateText">--</span>
+          <span id="syncStatus" class="sync-status">连接中</span>
+        </div>
+
+        <div class="metrics">
+          <article class="metric">
+            <span>今天预算</span>
+            <strong id="todayBudget">¥0.00</strong>
+          </article>
+          <article class="metric">
+            <span>今天已花</span>
+            <strong id="todaySpent">¥0.00</strong>
+          </article>
+          <article class="metric">
+            <span>剩余金额</span>
+            <strong id="remainingAmount">¥0.00</strong>
+          </article>
+          <article class="metric">
+            <span>明天预计预算</span>
+            <strong id="tomorrowBudget">¥0.00</strong>
+          </article>
+          <article class="metric">
+            <span>本周剩余额度</span>
+            <strong id="weekRemaining">¥0.00</strong>
+          </article>
+        </div>
+
+        <p id="weekHint" class="hint"></p>
+      </section>
+
+      <section class="panel">
+        <form id="expenseForm" class="expense-form">
+          <label class="field">
+            <span>添加今天消费</span>
+            <input
+              id="amountInput"
+              name="amount"
+              type="text"
+              inputmode="decimal"
+              placeholder="例如 18.5 或 12+18"
+              required
+            />
+          </label>
+
+          <div id="calculatorPanel" class="calculator-panel" hidden>
+            <div class="calculator-head">
+              <span>计算器</span>
+              <strong id="calculatorPreview">¥0.00</strong>
+            </div>
+            <div class="calculator-presets">
+              <button type="button" class="calc-preset" data-action="preset" data-amount="12">+12</button>
+              <button type="button" class="calc-preset" data-action="preset" data-amount="20">+20</button>
+              <button type="button" class="calc-preset" data-action="preset" data-amount="30">+30</button>
+            </div>
+            <div class="calculator-grid">
+              <button type="button" class="calc-key calc-muted" data-action="clear">C</button>
+              <button type="button" class="calc-key calc-muted" data-action="backspace">⌫</button>
+              <button type="button" class="calc-key calc-muted" data-value="(">(</button>
+              <button type="button" class="calc-key calc-operator" data-value="/">÷</button>
+
+              <button type="button" class="calc-key" data-value="7">7</button>
+              <button type="button" class="calc-key" data-value="8">8</button>
+              <button type="button" class="calc-key" data-value="9">9</button>
+              <button type="button" class="calc-key calc-operator" data-value="*">×</button>
+
+              <button type="button" class="calc-key" data-value="4">4</button>
+              <button type="button" class="calc-key" data-value="5">5</button>
+              <button type="button" class="calc-key" data-value="6">6</button>
+              <button type="button" class="calc-key calc-operator" data-value="-">-</button>
+
+              <button type="button" class="calc-key" data-value="1">1</button>
+              <button type="button" class="calc-key" data-value="2">2</button>
+              <button type="button" class="calc-key" data-value="3">3</button>
+              <button type="button" class="calc-key calc-operator" data-value="+">+</button>
+
+              <button type="button" class="calc-key" data-value="0">0</button>
+              <button type="button" class="calc-key" data-value=".">.</button>
+              <button type="button" class="calc-key" data-value=")">)</button>
+              <button type="button" class="calc-key calc-confirm" data-action="apply">确定</button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>备注（可不填）</span>
+            <input
+              id="noteInput"
+              name="note"
+              type="text"
+              maxlength="30"
+              placeholder="早餐、午饭、奶茶"
+            />
+          </label>
+
+          <button class="primary-button" type="submit">记一笔</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="list-header">
+          <h2>今天记录</h2>
+          <button id="clearToday" class="text-button" type="button">清空今天</button>
+        </div>
+        <ul id="todayList" class="expense-list"></ul>
+        <p id="emptyState" class="empty-state">今天还没有记录，先记第一笔吧。</p>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

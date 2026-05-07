@@ -1,0 +1,377 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0d12;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-strong: rgba(255, 255, 255, 0.09);
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #f4f7fb;
+  --muted: #9ca6b5;
+  --accent: #7ee7c1;
+  --accent-soft: rgba(126, 231, 193, 0.12);
+  --danger: #ff8b8b;
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(126, 231, 193, 0.12), transparent 30%),
+    linear-gradient(180deg, #10131a 0%, var(--bg) 100%);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+}
+
+.hero-card,
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.hero-card {
+  padding: 20px;
+}
+
+.date-strip {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sync-status {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sync-status.is-online {
+  background: rgba(126, 231, 193, 0.12);
+  color: var(--accent);
+}
+
+.sync-status.is-offline {
+  background: rgba(255, 139, 139, 0.12);
+  color: #ffb0b0;
+}
+
+.hero-top,
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.metric {
+  padding: 16px;
+  background: var(--panel-strong);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.metric:last-child {
+  grid-column: 1 / -1;
+}
+
+.metric span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.metric strong {
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.hint {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.panel {
+  margin-top: 14px;
+  padding: 18px;
+}
+
+.expense-form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.field input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 14px 16px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: rgba(126, 231, 193, 0.45);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.primary-button,
+.ghost-button,
+.chip,
+.text-button {
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.chip:hover,
+.text-button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  padding: 15px 18px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #06281f;
+  font-weight: 700;
+}
+
+.ghost-button {
+  min-width: 104px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.ghost-button.is-active {
+  background: rgba(255, 139, 139, 0.14);
+  color: #ffd0d0;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.calculator-panel {
+  padding: 14px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.calculator-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.calculator-head strong {
+  color: var(--text);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.calculator-presets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.calc-preset {
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.calc-key {
+  min-height: 62px;
+  border: 0;
+  border-radius: 999px;
+  background: #31343b;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.calc-muted {
+  background: #a5a5ab;
+  color: #111318;
+}
+
+.calc-operator {
+  background: #ff9f0a;
+  color: #ffffff;
+}
+
+.calc-confirm {
+  background: #ff9f0a;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.calc-key[data-value="0"] {
+  grid-column: span 2;
+  border-radius: 999px;
+  text-align: left;
+  padding-left: 24px;
+}
+
+.text-button {
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+}
+
+.expense-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.expense-meta {
+  display: grid;
+  gap: 5px;
+}
+
+.expense-note {
+  font-size: 14px;
+}
+
+.expense-time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.expense-amount {
+  font-weight: 700;
+}
+
+.empty-state {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.danger {
+  color: var(--danger);
+}
+
+@media (max-width: 420px) {
+  .app-shell {
+    padding-inline: 12px;
+  }
+
+  .hero-card,
+  .panel {
+    border-radius: 20px;
+  }
+
+  .metric strong {
+    font-size: 21px;
+  }
+}
