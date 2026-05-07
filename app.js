@@ -35,11 +35,19 @@ const elements = {
 let state = loadState();
 
 function hasAccess() {
-  return sessionStorage.getItem(ACCESS_SESSION_KEY) === "yes";
+  try {
+    return sessionStorage.getItem(ACCESS_SESSION_KEY) === "yes";
+  } catch (error) {
+    return false;
+  }
 }
 
 function unlockApp() {
-  sessionStorage.setItem(ACCESS_SESSION_KEY, "yes");
+  try {
+    sessionStorage.setItem(ACCESS_SESSION_KEY, "yes");
+  } catch (error) {
+    console.warn("Session storage unavailable, continuing without saved access session.", error);
+  }
   document.body.classList.remove("auth-locked");
   elements.authGate.hidden = true;
   elements.appShell.hidden = false;
@@ -423,7 +431,7 @@ elements.indulgenceToggle.addEventListener("click", toggleIndulgenceDay);
 elements.clearToday.addEventListener("click", clearTodayEntries);
 elements.authForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const password = elements.passwordInput.value;
+  const password = elements.passwordInput.value.trim();
 
   if (password === ACCESS_PASSWORD) {
     elements.authError.hidden = true;
