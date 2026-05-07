@@ -15,7 +15,30 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <main class="app-shell">
+    <section id="authGate" class="auth-gate">
+      <form id="authForm" class="auth-card">
+        <p class="eyebrow">Private Access</p>
+        <h1 class="auth-title">输入访问密码</h1>
+        <p class="auth-copy">这个网页目前只给你自己实验使用，输入密码后才能进入。</p>
+
+        <label class="field">
+          <span>访问密码</span>
+          <input
+            id="passwordInput"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="请输入密码"
+            required
+          />
+        </label>
+
+        <p id="authError" class="auth-error" hidden>密码不对，请再试一次。</p>
+        <button class="primary-button" type="submit">进入网页</button>
+      </form>
+    </section>
+
+    <main id="appShell" class="app-shell" hidden>
       <section class="hero-card">
         <div class="hero-top">
           <div>

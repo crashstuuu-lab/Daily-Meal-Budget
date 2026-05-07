@@ -1,9 +1,16 @@
+const ACCESS_PASSWORD = "chifan2026";
+const ACCESS_SESSION_KEY = "meal-budget-access-granted";
 const STORAGE_KEY = "meal-budget-tracker-v2";
 const BASE_DAILY_BUDGET = 50;
 const EMPTY_STATE = { entries: [], indulgenceDays: {} };
 const MAX_INDULGENCE_DAYS_PER_WEEK = 2;
 
 const elements = {
+  authGate: document.querySelector("#authGate"),
+  authForm: document.querySelector("#authForm"),
+  authError: document.querySelector("#authError"),
+  passwordInput: document.querySelector("#passwordInput"),
+  appShell: document.querySelector("#appShell"),
   todayBudget: document.querySelector("#todayBudget"),
   todaySpent: document.querySelector("#todaySpent"),
   remainingAmount: document.querySelector("#remainingAmount"),
@@ -26,6 +33,23 @@ const elements = {
 };
 
 let state = loadState();
+
+function hasAccess() {
+  return sessionStorage.getItem(ACCESS_SESSION_KEY) === "yes";
+}
+
+function unlockApp() {
+  sessionStorage.setItem(ACCESS_SESSION_KEY, "yes");
+  document.body.classList.remove("auth-locked");
+  elements.authGate.hidden = true;
+  elements.appShell.hidden = false;
+}
+
+function lockApp() {
+  document.body.classList.add("auth-locked");
+  elements.authGate.hidden = false;
+  elements.appShell.hidden = true;
+}
 
 function normalizeState(raw) {
   const indulgenceDays = raw?.indulgenceDays && typeof raw.indulgenceDays === "object" ? raw.indulgenceDays : {};
@@ -397,6 +421,20 @@ elements.calcKeys.forEach((button) => {
 
 elements.indulgenceToggle.addEventListener("click", toggleIndulgenceDay);
 elements.clearToday.addEventListener("click", clearTodayEntries);
+elements.authForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const password = elements.passwordInput.value;
+
+  if (password === ACCESS_PASSWORD) {
+    elements.authError.hidden = true;
+    elements.authForm.reset();
+    unlockApp();
+    return;
+  }
+
+  elements.authError.hidden = false;
+  elements.passwordInput.select();
+});
 
 window.addEventListener("storage", (event) => {
   if (event.key === STORAGE_KEY) {
@@ -408,3 +446,10 @@ window.addEventListener("storage", (event) => {
 setStorageStatus(true);
 updateCalculatorPreview();
 render();
+
+if (hasAccess()) {
+  unlockApp();
+} else {
+  lockApp();
+  elements.passwordInput.focus();
+}
